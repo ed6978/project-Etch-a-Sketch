@@ -1,1 +1,1 @@
-# project-Etch-a-Sketch
+Ill be attempting to make an Etch-a-Sketch/Sketchpad. In this project ill be demonstrating what i have learnt so far when it comes to my DOM manipulation/CSS and HTML skills. It's a frightning and intimidating challenge but it can be done. # project-Etch-a-Sketch
