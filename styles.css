@@ -1,0 +1,13 @@
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row; /* Add this line */
+  min-width: 256px; /* Adjust the minimum width as needed */
+}
+
+.grid-cell {
+  box-sizing: border-box;
+  border: 1px solid #000;
+  height: 16px;
+  width: 16px;
+}
