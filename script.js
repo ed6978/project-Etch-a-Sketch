@@ -11,4 +11,5 @@ function generateGrid(rows, cols) {
     }
   }
 }
-generateGrid(30, 30);
+generateGrid(16, 16);
+console.log(generateGrid);
