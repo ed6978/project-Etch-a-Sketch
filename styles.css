@@ -1,18 +1,41 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #96d100;
+}
+
 #grid-container {
   display: flex;
-  flex-flow: wrap row;
-}
-
-.grid-cell {
-  align-self: flex-start;
-  height: 50px;
-  width: 50px;
+  flex-wrap: wrap;
+  width: 960px;
+  height: 760px;
+  overflow: hidden;
+  border: 1px solid white;
   background-color: white;
-  border: 1px solid black;
-  margin: 0px;
-  flex: 0 1 auto;
 }
 
-.reset-button {
-  padding: 10px;
+/* cell layout */
+.grid-cell {
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  flex-basis: calc(100% / 16);
+  height: calc(100% / 16);
+}
+
+/* buttons */
+.reset-button,
+.user-choice-one {
+  height: 30px;
+  width: 80px;
+  font-size: 10px;
+  margin: 4px;
+}
+
+.title {
+  font-size: 90px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  color: black;
+  margin-top: 10px;
 }

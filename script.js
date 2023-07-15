@@ -1,24 +1,25 @@
 const gridContainer = document.getElementById("grid-container");
 const gridButtonGenerator = document.createElement("button");
 
-//creates and generates grids
+//creates and generates grids //
 function generateGrid(rows, cols) {
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       const gridCell = document.createElement("div");
       gridCell.classList.add("grid-cell");
-      gridCell.addEventListener("click", changeColor);
+      gridCell.addEventListener("mouseover", changeColor);
       gridContainer.appendChild(gridCell);
     }
   }
 }
 generateGrid(16, 16);
 
+//drawing color //
 function changeColor(event) {
   event.target.style.backgroundColor = "black";
 }
-console.log(changeColor);
 
+//reset grid //
 function resetGridCell() {
   const gridCells = document.querySelectorAll(".grid-cell");
   gridCells.forEach((cell) => {
@@ -26,8 +27,20 @@ function resetGridCell() {
   });
 }
 
-const resetButton = document.createElement("button");
-resetButton.textContent = "Reset";
-resetButton.classList.add("reset-button");
-resetButton.addEventListener("click", resetGridCell);
-document.body.appendChild(resetButton);
+// reset button //
+// const resetButton = document.createElement("button");
+// resetButton.textContent = "Reset";
+// resetButton.classList.add("reset-button");
+// resetButton.addEventListener("click", resetGridCell);
+// document.body.appendChild(resetButton);
+
+// 34x34 square grid button//
+
+const userGridChoiceOne = document.createElement("button");
+userGridChoiceOne.textContent = "34x34";
+userGridChoiceOne.classList.add("user-choice-one");
+
+// userGridChoiceOne.addEventListener("click", function () {
+//   generateGrid(34, 34);
+// });
+// document.body.appendChild(userGridChoiceOne);
