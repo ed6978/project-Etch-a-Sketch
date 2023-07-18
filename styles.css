@@ -26,7 +26,8 @@ body {
 
 /* buttons */
 .reset-button,
-.user-choice-one {
+.user-choice-one,
+.color-btn {
   height: 30px;
   width: 80px;
   font-size: 10px;
