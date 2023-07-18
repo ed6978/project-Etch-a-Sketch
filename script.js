@@ -61,11 +61,14 @@ eraserBtn.addEventListener("click", function () {
 });
 document.body.appendChild(eraserBtn);
 
-function color(event) {
-  cell.removeEventListener("mouseover", eraser);
-  cell.addEventListener("mouseover", changeColor);
-}
-
+// color button to use after using an eraser
 const colorBtn = document.createElement("button");
 colorBtn.textContent = "Color";
-colorBtn.addEventListener();
+colorBtn.classList.add("color-btn");
+colorBtn.addEventListener("click", function () {
+  gridContainer.querySelectorAll(".grid-cell").forEach((cell) => {
+    cell.removeEventListener("mouseover", eraser);
+    cell.addEventListener("mouseover", changeColor);
+  });
+});
+document.body.appendChild(colorBtn);
