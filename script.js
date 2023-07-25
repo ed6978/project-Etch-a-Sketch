@@ -2,6 +2,24 @@ const gridContainer = document.getElementById("grid-container");
 const gridButtonGenerator = document.createElement("button");
 const buttonContainer = document.createElement("div");
 const gridCell = document.createElement("div");
+const colors = [
+  "red",
+  "green",
+  "orange",
+  "pink",
+  "purple",
+  "blue",
+  "black",
+  "velvet",
+  "violet",
+  "brown",
+  "yellow",
+  "grey",
+  "lavender",
+  "maroon",
+  "indigo",
+  "cyan",
+];
 
 //button container to style buttons//
 buttonContainer.classList.add("button-container");
@@ -17,24 +35,10 @@ function generateGrid(size) {
     cell.classList.add("grid-cell");
     cell.addEventListener("mouseover", changeColor); // color squares
     cell.addEventListener("mouseover", eraser); // eraser
+    // cell.addEventListener("click", randomColorPicks);
     gridContainer.appendChild(cell);
   }
 }
-
-// user choice on grid size through prompt//
-// function setGridSize() {
-//   let gridSizeInput = prompt("What size would you like the grid?");
-//   let gridSize = parseInt(gridSizeInput, 10);
-
-//   if (isNan(gridSize) || gridSize <= 0) {
-//     alert("Please enter a valid positive number for your chosen grid size");
-//     return;
-//   }
-//   generateGrid(gridSize);
-
-//   gridContainer.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
-//   gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
-// }
 
 generateGrid(16, 16);
 
@@ -75,9 +79,9 @@ eraserBtn.addEventListener("click", function () {
 });
 document.body.appendChild(eraserBtn);
 
-// color button to use after using an eraser
+// color button //
 const colorBtn = document.createElement("button");
-colorBtn.textContent = "Pen";
+colorBtn.textContent = "Draw";
 colorBtn.classList.add("color-btn");
 
 colorBtn.addEventListener("click", function () {
@@ -88,9 +92,7 @@ colorBtn.addEventListener("click", function () {
 });
 document.body.appendChild(colorBtn);
 
-//user grid size input //
-
-// user grid size choice
+// user grid size input //
 let setGridSizeBtn = document.createElement("button");
 setGridSizeBtn.textContent = "Grid Size";
 setGridSizeBtn.classList.add("user-grid-choice");
@@ -100,7 +102,9 @@ setGridSizeBtn.addEventListener("click", function () {
     return;
   }
   if (value > 100) {
-    value = alert("Sorry that value is not supported");
+    value = alert(
+      "Sorry that value is not supported please keep the format under 100"
+    );
   } else if (value <= 100) {
     generateGrid(value);
   }
@@ -115,3 +119,22 @@ buttonContainer.appendChild(resetButton);
 buttonContainer.appendChild(setGridSizeBtn);
 
 document.body.appendChild(buttonContainer);
+
+// random color pick //
+
+function randomColorPicks(event) {
+  let randomColorIndex = Math.floor(Math.random() * colors.length);
+  let randomColor = colors[randomColorIndex];
+  event.target.style.background = randomColor;
+}
+const randomColorBtn = document.createElement("button");
+randomColorBtn.classList.add("random-colors");
+randomColorBtn.textContent = "Random Colors";
+
+randomColorBtn.addEventListener("click", function () {
+  gridContainer.querySelectorAll(".grid-cell").forEach((cell) => {
+    cell.removeEventListener("mouseover", eraser);
+    cell.addEventListener("mouseover", randomColorPicks);
+  });
+});
+document.body.appendChild(randomColorBtn);

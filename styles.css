@@ -26,7 +26,8 @@ body {
 .user-choice-one,
 .color-btn,
 .eraser,
-.user-grid-choice {
+.user-grid-choice,
+.random-colors {
   height: 30px;
   width: 120px;
   font-size: 14px;
