@@ -2,24 +2,6 @@ const gridContainer = document.getElementById("grid-container");
 const gridButtonGenerator = document.createElement("button");
 const buttonContainer = document.createElement("div");
 const gridCell = document.createElement("div");
-const colors = [
-  "red",
-  "green",
-  "orange",
-  "pink",
-  "purple",
-  "blue",
-  "black",
-  "velvet",
-  "violet",
-  "brown",
-  "yellow",
-  "grey",
-  "lavender",
-  "maroon",
-  "indigo",
-  "cyan",
-];
 
 //button container to style buttons//
 buttonContainer.classList.add("button-container");
@@ -33,25 +15,25 @@ function generateGrid(size) {
   for (let i = 0; i < size * size; i++) {
     const cell = gridCell.cloneNode();
     cell.classList.add("grid-cell");
-    cell.addEventListener("mouseover", changeColor); // color squares
+    cell.addEventListener("mouseover", changeColor); // color squares.. draw button
     cell.addEventListener("mouseover", eraser); // eraser
-    // cell.addEventListener("click", randomColorPicks);
     gridContainer.appendChild(cell);
   }
 }
 
 generateGrid(16, 16);
 
-//drawing color //
+// drawing color //
 function changeColor(event) {
-  event.target.style.backgroundColor = "black";
+  event.target.style.backgroundColor = "#1a1a1a";
 }
 
+// eraser //
 function eraser(event) {
-  event.target.style.backgroundColor = "white";
+  event.target.style.backgroundColor = "#e0e0e0";
 }
 
-//reset grid //
+// reset grid //
 function resetGridCell() {
   const gridCells = document.querySelectorAll(".grid-cell");
   gridCells.forEach((cell) => {
@@ -79,7 +61,7 @@ eraserBtn.addEventListener("click", function () {
 });
 document.body.appendChild(eraserBtn);
 
-// color button //
+// draw button function //
 const colorBtn = document.createElement("button");
 colorBtn.textContent = "Draw";
 colorBtn.classList.add("color-btn");
@@ -87,6 +69,7 @@ colorBtn.classList.add("color-btn");
 colorBtn.addEventListener("click", function () {
   gridContainer.querySelectorAll(".grid-cell").forEach((cell) => {
     cell.removeEventListener("mouseover", eraser);
+    cell.removeEventListener("mouseover", randomColorPicks);
     cell.addEventListener("mouseover", changeColor);
   });
 });
@@ -96,6 +79,7 @@ document.body.appendChild(colorBtn);
 let setGridSizeBtn = document.createElement("button");
 setGridSizeBtn.textContent = "Grid Size";
 setGridSizeBtn.classList.add("user-grid-choice");
+
 setGridSizeBtn.addEventListener("click", function () {
   const value = prompt("What size would you like the grid?");
   if (typeof value === "undefined") {
@@ -103,7 +87,7 @@ setGridSizeBtn.addEventListener("click", function () {
   }
   if (value > 100) {
     value = alert(
-      "Sorry that value is not supported please keep the format under 100"
+      "Sorry that value is not supported please keep the format 100 or under"
     );
   } else if (value <= 100) {
     generateGrid(value);
@@ -121,12 +105,29 @@ buttonContainer.appendChild(setGridSizeBtn);
 document.body.appendChild(buttonContainer);
 
 // random color pick //
-
 function randomColorPicks(event) {
+  const colors = [
+    "red",
+    "green",
+    "orange",
+    "pink",
+    "purple",
+    "blue",
+    "velvet",
+    "violet",
+    "brown",
+    "yellow",
+    "#994d00",
+    "lavender",
+    "maroon",
+    "indigo",
+    "cyan",
+  ];
   let randomColorIndex = Math.floor(Math.random() * colors.length);
   let randomColor = colors[randomColorIndex];
   event.target.style.background = randomColor;
 }
+
 const randomColorBtn = document.createElement("button");
 randomColorBtn.classList.add("random-colors");
 randomColorBtn.textContent = "Random Colors";
@@ -138,3 +139,36 @@ randomColorBtn.addEventListener("click", function () {
   });
 });
 document.body.appendChild(randomColorBtn);
+buttonContainer.appendChild(randomColorBtn);
+
+// opacity //
+let opacity = 0.1;
+
+function progressiveDarkeningEffect(event) {
+  gridContainer.querySelectorAll(".grid-cell").forEach((cell) => {
+    opacity = Math.min(1, opacity + 0.1);
+    let opacityColor = `rgb(140, 140, 140, ${opacity})`;
+    event.target.style.background = opacityColor;
+  });
+}
+const opacityButton = document.createElement("button");
+opacityButton.textContent = "Opacity";
+opacityButton.classList.add("opacity-button");
+
+opacityButton.addEventListener("click", function () {
+  gridContainer.querySelectorAll(".grid-cell").forEach((cell) => {
+    cell.removeEventListener("mouseover", randomColorPicks);
+    cell.removeEventListener("mouseover", eraser);
+    cell.removeEventListener("mouseover", changeColor);
+    cell.addEventListener("mouseover", progressiveDarkeningEffect);
+  });
+});
+
+document.body.appendChild(opacityButton);
+buttonContainer.appendChild(opacityButton);
+
+// div outskirt design
+const boxDesign = document.createElement("div");
+boxDesign.classList.add("box-design");
+document.body.appendChild(boxDesign);
+boxDesign.appendChild(gridContainer);
