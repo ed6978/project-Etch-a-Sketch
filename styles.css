@@ -3,22 +3,33 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #96d100;
+  background-color: #e0e0e0;
 }
 
 #grid-container {
   display: grid;
-  width: 960px;
-  height: 760px;
+  /* width: 60vw; */
+  min-height: 70vh;
+  min-width: 960px;
   overflow: hidden;
-  /* border: 1px solid white; */
-  background-color: white;
+  background-color: #e0e0e0;
+  flex-shrink: 1;
 }
 
 /* cell layout */
 .grid-cell {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
   box-sizing: border-box;
-  border: 1px solid black;
+  border: 1px solid #404040;
+}
+
+.button-container {
+  display: flex;
+  box-shadow: none;
+  margin-right: 8px;
 }
 
 /* buttons */
@@ -27,15 +38,15 @@ body {
 .color-btn,
 .eraser,
 .user-grid-choice,
-.random-colors {
-  height: 30px;
-  width: 120px;
-  font-size: 14px;
+.random-colors,
+.opacity-button {
+  padding: 8px;
+  width: 130px;
+  font-size: 15px;
   margin: 4px;
   border-radius: 10px;
-  box-shadow: none;
-  background-color: #000;
-  color: #fff;
+  background-color: #262626;
+  color: white;
   cursor: pointer;
 }
 
@@ -44,4 +55,10 @@ body {
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   color: black;
   margin-top: 10px;
+}
+
+/* outskirt design div */
+.box-design {
+  padding: 20px;
+  background-color: #262626;
 }
