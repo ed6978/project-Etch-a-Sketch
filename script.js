@@ -41,12 +41,13 @@ function resetGridCell() {
   });
 }
 
-//reset button //
+// reset button //
 const resetButton = document.createElement("button");
 resetButton.textContent = "Reset";
 resetButton.classList.add("reset-button");
 resetButton.addEventListener("click", resetGridCell);
 document.body.appendChild(resetButton);
+buttonContainer.appendChild(resetButton);
 
 // eraser //
 const eraserBtn = document.createElement("button");
@@ -60,6 +61,7 @@ eraserBtn.addEventListener("click", function () {
   });
 });
 document.body.appendChild(eraserBtn);
+buttonContainer.appendChild(eraserBtn);
 
 // draw button function //
 const colorBtn = document.createElement("button");
@@ -74,6 +76,7 @@ colorBtn.addEventListener("click", function () {
   });
 });
 document.body.appendChild(colorBtn);
+buttonContainer.appendChild(colorBtn);
 
 // user grid size input //
 let setGridSizeBtn = document.createElement("button");
@@ -95,13 +98,7 @@ setGridSizeBtn.addEventListener("click", function () {
 });
 
 document.body.appendChild(setGridSizeBtn);
-
-//buttons //
-buttonContainer.appendChild(colorBtn);
-buttonContainer.appendChild(eraserBtn);
-buttonContainer.appendChild(resetButton);
 buttonContainer.appendChild(setGridSizeBtn);
-
 document.body.appendChild(buttonContainer);
 
 // random color pick //
@@ -135,6 +132,7 @@ randomColorBtn.textContent = "Random Colors";
 randomColorBtn.addEventListener("click", function () {
   gridContainer.querySelectorAll(".grid-cell").forEach((cell) => {
     cell.removeEventListener("mouseover", eraser);
+    cell.removeEventListener("mouseover", changeColor);
     cell.addEventListener("mouseover", randomColorPicks);
   });
 });
@@ -142,25 +140,37 @@ document.body.appendChild(randomColorBtn);
 buttonContainer.appendChild(randomColorBtn);
 
 // opacity //
-let opacity = 0.1;
+let opacityIncrement = 0.1;
+const maxOpacity = 1;
+let increasingOpacity = true;
 
-function progressiveDarkeningEffect(event) {
-  gridContainer.querySelectorAll(".grid-cell").forEach((cell) => {
-    opacity = Math.min(1, opacity + 0.1);
-    let opacityColor = `rgb(140, 140, 140, ${opacity})`;
-    event.target.style.background = opacityColor;
-  });
+function darkeningEffect(event) {
+  if (increasingOpacity) {
+    opacityIncrement = Math.min(maxOpacity, opacityIncrement + 0.1);
+    if (opacityIncrement === maxOpacity) {
+      increasingOpacity = false;
+    }
+  } else {
+    opacityIncrement = Math.max(0.1, opacityIncrement - 0.1);
+    if (opacityIncrement === 0.1) {
+      increasingOpacity = true;
+    }
+  }
+
+  let opacityColor = `rgba(0, 0, 0, ${opacityIncrement})`;
+  event.target.style.background = opacityColor;
 }
+
 const opacityButton = document.createElement("button");
 opacityButton.textContent = "Opacity";
 opacityButton.classList.add("opacity-button");
 
 opacityButton.addEventListener("click", function () {
   gridContainer.querySelectorAll(".grid-cell").forEach((cell) => {
+    cell.removeEventListener("mouseover", changeColor);
     cell.removeEventListener("mouseover", randomColorPicks);
     cell.removeEventListener("mouseover", eraser);
-    cell.removeEventListener("mouseover", changeColor);
-    cell.addEventListener("mouseover", progressiveDarkeningEffect);
+    cell.addEventListener("mouseover", darkeningEffect);
   });
 });
 
