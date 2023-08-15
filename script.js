@@ -84,7 +84,9 @@ setGridSizeBtn.textContent = "Grid Size";
 setGridSizeBtn.classList.add("user-grid-choice");
 
 setGridSizeBtn.addEventListener("click", function () {
-  const value = prompt("What size would you like the grid?");
+  const value = prompt(
+    "What size would you like the grid? (Please keep it 100 or under)"
+  );
   if (typeof value === "undefined") {
     return;
   }
@@ -162,7 +164,7 @@ function darkeningEffect(event) {
 }
 
 const opacityButton = document.createElement("button");
-opacityButton.textContent = "Opacity";
+opacityButton.textContent = "Opacity Effect";
 opacityButton.classList.add("opacity-button");
 
 opacityButton.addEventListener("click", function () {
