@@ -103,27 +103,17 @@ document.body.appendChild(setGridSizeBtn);
 buttonContainer.appendChild(setGridSizeBtn);
 document.body.appendChild(buttonContainer);
 
+// random color rgb generator //
+function getRandomColor() {
+  const red = Math.floor(Math.random() * 256);
+  const green = Math.floor(Math.random() * 256);
+  const blue = Math.floor(Math.random() * 256);
+  return `rgb(${red},${green},${blue})`;
+}
+
 // random color pick //
 function randomColorPicks(event) {
-  const colors = [
-    "red",
-    "green",
-    "orange",
-    "pink",
-    "purple",
-    "blue",
-    "velvet",
-    "violet",
-    "brown",
-    "yellow",
-    "#994d00",
-    "lavender",
-    "maroon",
-    "indigo",
-    "cyan",
-  ];
-  let randomColorIndex = Math.floor(Math.random() * colors.length);
-  let randomColor = colors[randomColorIndex];
+  let randomColor = getRandomColor();
   event.target.style.background = randomColor;
 }
 
