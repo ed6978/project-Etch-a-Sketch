@@ -3,7 +3,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(to bottom, #8c8c8c, #808080);
+  background-image: linear-gradient(to bottom, #e6e6e6, #8c8c8c);
 }
 
 /* cell container */
@@ -51,7 +51,7 @@ body {
   transition: background-color 0.3s ease;
 }
 
-/* Hover effect */
+/* Button Hover effect */
 .reset-button:hover,
 .user-choice-one:hover,
 .color-btn:hover,
@@ -72,11 +72,12 @@ body {
 
 .main-title {
   font-size: 80px;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .sub-title {
   font-size: 40px;
+  margin-top: -50px;
 }
 
 /* outskirt design div */
